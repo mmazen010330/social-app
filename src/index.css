@@ -1,0 +1,5 @@
+@import "tailwindcss";
+@import "@heroui/styles"; 
+@theme {
+    --color-main-color: #2ccce4
+}
