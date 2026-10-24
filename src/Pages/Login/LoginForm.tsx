@@ -75,7 +75,7 @@ function LoginForm() {
   return (
     <Form
       onSubmit={handleSubmit(sendUserData)}
-      className="flex w-96 flex-col gap-4 bg-white p-10 min-w-3xl my-10 rounded-4xl shadow-2xl"
+      className="flex w-full max-w-md flex-col gap-4 bg-white p-6 sm:p-10 my-4 sm:my-8 rounded-2xl sm:rounded-3xl shadow-xl"
     >
 
       

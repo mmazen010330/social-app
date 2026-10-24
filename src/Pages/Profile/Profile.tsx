@@ -216,21 +216,60 @@ function Profile() {
         {/* Action Icons on Top-Right Corner */}
         {hasCustomCover ? (
           /* When cover is custom (not default): show View cover, Change cover, Remove */
-          <div className="absolute top-4 right-4 flex items-center gap-2 z-20 opacity-90 group-hover:opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-200">
+          <div className="absolute top-2 sm:top-4 right-2 sm:right-4 flex items-center gap-1 sm:gap-2 z-20 opacity-95 group-hover:opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-200">
             <button
               type="button"
               onClick={() => setIsViewingCover(true)}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-black/75 hover:bg-black text-white text-xs font-semibold backdrop-blur-md shadow-sm transition-all cursor-pointer"
+              className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-black/75 hover:bg-black text-white text-[11px] sm:text-xs font-semibold backdrop-blur-md shadow-sm transition-all cursor-pointer"
             >
-              <Maximize2 size={13} />
-              <span>View cover</span>
+              <Maximize2 size={12} />
+              <span className="hidden sm:inline">View cover</span>
+              <span className="sm:hidden">View</span>
             </button>
 
             <button
               type="button"
               disabled={isUploadingCover}
               onClick={() => coverInputRef.current?.click()}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-black/75 hover:bg-black text-white text-xs font-semibold backdrop-blur-md shadow-sm transition-all cursor-pointer"
+              className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-black/75 hover:bg-black text-white text-[11px] sm:text-xs font-semibold backdrop-blur-md shadow-sm transition-all cursor-pointer"
+            >
+              {isUploadingCover ? (
+                <>
+                  <Loader2 size={12} className="animate-spin" />
+                  <span>Uploading...</span>
+                </>
+              ) : (
+                <>
+                  <Camera size={12} />
+                  <span className="hidden sm:inline">Change cover</span>
+                  <span className="sm:hidden">Change</span>
+                </>
+              )}
+            </button>
+
+            <button
+              type="button"
+              disabled={isDeletingCover}
+              onClick={handleDeleteCover}
+              className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-black/75 hover:bg-black text-white text-[11px] sm:text-xs font-semibold backdrop-blur-md shadow-sm transition-all cursor-pointer"
+            >
+              {isDeletingCover ? (
+                <Loader2 size={12} className="animate-spin" />
+              ) : (
+                <Trash2 size={12} />
+              )}
+              <span className="hidden sm:inline">Remove</span>
+              <span className="sm:hidden">Del</span>
+            </button>
+          </div>
+        ) : (
+          /* When cover is default: show Change cover */
+          <div className="absolute top-2 sm:top-4 right-2 sm:right-4 z-20 opacity-95 group-hover:opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-200">
+            <button
+              type="button"
+              disabled={isUploadingCover}
+              onClick={() => coverInputRef.current?.click()}
+              className="flex items-center gap-1.5 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-xl bg-black/70 hover:bg-black text-white text-[11px] sm:text-xs font-semibold backdrop-blur-md shadow-md transition-all cursor-pointer"
             >
               {isUploadingCover ? (
                 <>
@@ -240,42 +279,6 @@ function Profile() {
               ) : (
                 <>
                   <Camera size={13} />
-                  <span>Change cover</span>
-                </>
-              )}
-            </button>
-
-            <button
-              type="button"
-              disabled={isDeletingCover}
-              onClick={handleDeleteCover}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-black/75 hover:bg-black text-white text-xs font-semibold backdrop-blur-md shadow-sm transition-all cursor-pointer"
-            >
-              {isDeletingCover ? (
-                <Loader2 size={13} className="animate-spin" />
-              ) : (
-                <Trash2 size={13} />
-              )}
-              <span>Remove</span>
-            </button>
-          </div>
-        ) : (
-          /* When cover is default: show Change cover on hover */
-          <div className="absolute top-4 right-4 z-20 opacity-90 group-hover:opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-200">
-            <button
-              type="button"
-              disabled={isUploadingCover}
-              onClick={() => coverInputRef.current?.click()}
-              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-black/70 hover:bg-black text-white text-xs font-semibold backdrop-blur-md shadow-md transition-all cursor-pointer"
-            >
-              {isUploadingCover ? (
-                <>
-                  <Loader2 size={14} className="animate-spin" />
-                  <span>Uploading...</span>
-                </>
-              ) : (
-                <>
-                  <Camera size={14} />
                   <span>Change cover</span>
                 </>
               )}
@@ -320,34 +323,34 @@ function Profile() {
       )}
 
       {/* Profile Info Summary Card (Overlapping Banner) */}
-      <div className="bg-white rounded-2xl shadow-xs border border-gray-100 p-5 sm:p-7 -mt-16 sm:-mt-20 mx-2 sm:mx-6 relative z-10">
+      <div className="bg-white rounded-2xl shadow-xs border border-gray-100 p-4 sm:p-7 -mt-14 sm:-mt-20 mx-1.5 sm:mx-6 relative z-10">
         {/* Top Header Row */}
-        <div className="flex flex-col sm:flex-row items-center sm:items-start justify-between gap-5">
+        <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between gap-5">
           {/* Avatar & User Details */}
-          <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 text-center sm:text-left">
-            <div className="relative">
+          <div className="flex flex-col sm:flex-row items-center sm:items-start gap-3 sm:gap-4 text-center sm:text-left w-full lg:w-auto">
+            <div className="relative shrink-0">
               <img
                 src={userAvatar}
                 alt={activeUser?.name || "User"}
-                className="w-24 h-24 sm:w-28 sm:h-28 rounded-full border-4 border-white shadow-md object-cover bg-white"
+                className="w-20 h-20 sm:w-28 sm:h-28 rounded-full border-4 border-white shadow-md object-cover bg-white"
               />
               <Link
                 to="/change-profile-pic"
-                className="absolute bottom-1 right-1 p-1.5 rounded-full bg-blue-600 hover:bg-blue-700 text-white shadow-sm transition-colors cursor-pointer"
+                className="absolute bottom-0 right-0 sm:bottom-1 sm:right-1 p-1.5 rounded-full bg-blue-600 hover:bg-blue-700 text-white shadow-sm transition-colors cursor-pointer"
                 title="Change profile picture"
               >
                 <Camera size={14} />
               </Link>
             </div>
 
-            <div className="pt-1">
-              <h1 className="text-2xl font-extrabold text-gray-900 leading-tight">
+            <div className="pt-0 sm:pt-1 min-w-0">
+              <h1 className="text-xl sm:text-2xl font-extrabold text-gray-900 leading-tight truncate">
                 {activeUser?.name || "User"}
               </h1>
-              <p className="text-sm font-semibold text-gray-400 mt-0.5">
+              <p className="text-xs sm:text-sm font-semibold text-gray-400 mt-0.5 truncate">
                 @{activeUser?.username || "user"}
               </p>
-              <div className="mt-2.5">
+              <div className="mt-2">
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50/80 border border-blue-200/60 text-blue-700 text-xs font-bold">
                   <Users size={13} />
                   <span>Route Posts member</span>
@@ -357,30 +360,30 @@ function Profile() {
           </div>
 
           {/* Followers / Following / Bookmarks Counters */}
-          <div className="flex items-center gap-2 sm:gap-3">
-            <div className="bg-white border border-gray-200/80 rounded-2xl px-4 sm:px-6 py-3 text-center min-w-[85px] sm:min-w-[105px]">
-              <span className="block text-[10px] sm:text-[11px] font-extrabold text-gray-400 tracking-wider">
+          <div className="grid grid-cols-3 gap-2 w-full lg:w-auto">
+            <div className="bg-white border border-gray-200/80 rounded-xl sm:rounded-2xl px-2 sm:px-5 py-2.5 sm:py-3 text-center min-w-0 sm:min-w-[100px]">
+              <span className="block text-[9px] sm:text-[11px] font-extrabold text-gray-400 tracking-wider truncate">
                 FOLLOWERS
               </span>
-              <span className="block text-xl sm:text-2xl font-extrabold text-gray-900 mt-0.5">
+              <span className="block text-lg sm:text-2xl font-extrabold text-gray-900 mt-0.5">
                 {activeUser?.followersCount ?? activeUser?.followers?.length ?? 1}
               </span>
             </div>
 
-            <div className="bg-white border border-gray-200/80 rounded-2xl px-4 sm:px-6 py-3 text-center min-w-[85px] sm:min-w-[105px]">
-              <span className="block text-[10px] sm:text-[11px] font-extrabold text-gray-400 tracking-wider">
+            <div className="bg-white border border-gray-200/80 rounded-xl sm:rounded-2xl px-2 sm:px-5 py-2.5 sm:py-3 text-center min-w-0 sm:min-w-[100px]">
+              <span className="block text-[9px] sm:text-[11px] font-extrabold text-gray-400 tracking-wider truncate">
                 FOLLOWING
               </span>
-              <span className="block text-xl sm:text-2xl font-extrabold text-gray-900 mt-0.5">
+              <span className="block text-lg sm:text-2xl font-extrabold text-gray-900 mt-0.5">
                 {activeUser?.followingCount ?? activeUser?.following?.length ?? 2}
               </span>
             </div>
 
-            <div className="bg-white border border-gray-200/80 rounded-2xl px-4 sm:px-6 py-3 text-center min-w-[85px] sm:min-w-[105px]">
-              <span className="block text-[10px] sm:text-[11px] font-extrabold text-gray-400 tracking-wider">
+            <div className="bg-white border border-gray-200/80 rounded-xl sm:rounded-2xl px-2 sm:px-5 py-2.5 sm:py-3 text-center min-w-0 sm:min-w-[100px]">
+              <span className="block text-[9px] sm:text-[11px] font-extrabold text-gray-400 tracking-wider truncate">
                 BOOKMARKS
               </span>
-              <span className="block text-xl sm:text-2xl font-extrabold text-gray-900 mt-0.5">
+              <span className="block text-lg sm:text-2xl font-extrabold text-gray-900 mt-0.5">
                 {activeUser?.bookmarksCount ?? bookmarks.length}
               </span>
             </div>
@@ -430,12 +433,12 @@ function Profile() {
       </div>
 
       {/* Tabs Row (My Posts / Saved) */}
-      <div className="mt-6 mb-4 flex items-center justify-between bg-white rounded-2xl p-2 border border-gray-100 shadow-xs">
-        <div className="flex items-center gap-1.5">
+      <div className="mt-4 sm:mt-6 mb-4 flex items-center justify-between bg-white rounded-2xl p-1.5 sm:p-2 border border-gray-100 shadow-xs">
+        <div className="flex items-center gap-1 sm:gap-1.5 flex-1 sm:flex-none">
           <button
             type="button"
             onClick={() => setActiveTab("posts")}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+            className={`flex items-center justify-center gap-2 px-3 sm:px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex-1 sm:flex-none ${
               activeTab === "posts"
                 ? "bg-blue-50 text-blue-600 shadow-2xs"
                 : "text-gray-600 hover:text-gray-900"
@@ -448,7 +451,7 @@ function Profile() {
           <button
             type="button"
             onClick={() => setActiveTab("saved")}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+            className={`flex items-center justify-center gap-2 px-3 sm:px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex-1 sm:flex-none ${
               activeTab === "saved"
                 ? "bg-blue-50 text-blue-600 shadow-2xs"
                 : "text-gray-600 hover:text-gray-900"
@@ -459,7 +462,7 @@ function Profile() {
           </button>
         </div>
 
-        <div className="flex items-center gap-2 mr-2">
+        <div className="flex items-center gap-2 mr-1 sm:mr-2">
           <button
             type="button"
             onClick={() => loadProfileInformation(true)}

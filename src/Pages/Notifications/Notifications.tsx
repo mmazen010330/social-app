@@ -147,25 +147,25 @@ function Notifications() {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto px-3 sm:px-6 py-6">
-      <div className="bg-white rounded-2xl shadow-xs border border-gray-100 p-5 sm:p-7">
+    <div className="w-full max-w-4xl mx-auto px-2 sm:px-6 py-4 sm:py-6">
+      <div className="bg-white rounded-2xl shadow-xs border border-gray-100 p-3.5 sm:p-6 md:p-7">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-gray-100">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 pb-4 border-b border-gray-100">
           <div>
-            <h1 className="text-2xl font-extrabold text-gray-900 tracking-tight">
+            <h1 className="text-xl sm:text-2xl font-extrabold text-gray-900 tracking-tight">
               Notifications
             </h1>
-            <p className="text-xs text-gray-500 mt-1">
+            <p className="text-xs text-gray-500 mt-0.5 sm:mt-1">
               Realtime updates for likes, comments, shares, and follows.
             </p>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 w-full sm:w-auto">
             <button
               type="button"
               onClick={() => loadNotificationsData(1, false, filter)}
               disabled={isLoading}
-              className="p-2 rounded-xl border border-gray-200 text-gray-600 hover:bg-gray-50 transition-colors cursor-pointer"
+              className="p-2 rounded-xl border border-gray-200 text-gray-600 hover:bg-gray-50 transition-colors cursor-pointer shrink-0"
               title="Refresh"
             >
               <RefreshCw
@@ -178,7 +178,7 @@ function Notifications() {
               type="button"
               disabled={isMarkingAll || unreadCount === 0}
               onClick={handleMarkAllAsRead}
-              className="flex items-center gap-1.5 px-4 py-2 rounded-xl border border-gray-200 text-xs font-bold text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all cursor-pointer"
+              className="flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-3 sm:px-4 py-2 rounded-xl border border-gray-200 text-xs font-bold text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all cursor-pointer"
             >
               {isMarkingAll ? (
                 <Loader2 size={13} className="animate-spin" />
@@ -266,20 +266,20 @@ function Notifications() {
               return (
                 <div
                   key={notif._id}
-                  className={`flex items-start justify-between gap-3 p-4 rounded-2xl border transition-all ${
+                  className={`flex flex-col sm:flex-row items-start justify-between gap-3 p-3.5 sm:p-4 rounded-2xl border transition-all ${
                     isUnread
                       ? "bg-blue-50/50 border-blue-200/70 shadow-2xs"
                       : "bg-white border-gray-200/80 hover:bg-gray-50/50"
                   }`}
                 >
-                  <div className="flex items-start gap-3 min-w-0">
+                  <div className="flex items-start gap-2.5 sm:gap-3 min-w-0 w-full sm:w-auto">
                     <img
                       src={actorPhoto}
                       alt={notif.actor?.name || "User"}
-                      className="w-11 h-11 rounded-full object-cover border border-gray-200 shrink-0 mt-0.5"
+                      className="w-10 h-10 rounded-full object-cover border border-gray-200 shrink-0 mt-0.5"
                     />
 
-                    <div className="min-w-0 space-y-1">
+                    <div className="min-w-0 flex-1 space-y-1">
                       <p className="text-xs sm:text-sm font-bold text-gray-900 leading-snug">
                         {getNotificationText(notif)}
                       </p>

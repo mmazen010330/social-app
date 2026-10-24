@@ -152,23 +152,23 @@ function ChangeProfilePic() {
   const currentAvatar = userData?.photo || defaultAvatar;
 
   return (
-    <section className="min-h-[calc(100vh-100px)] flex items-center justify-center py-12 px-4">
-      <div className="w-full max-w-xl bg-white rounded-3xl shadow-2xl border border-slate-100 p-8 sm:p-10 transition-all">
+    <section className="min-h-[calc(100vh-100px)] flex items-center justify-center py-4 sm:py-12 px-2 sm:px-4">
+      <div className="w-full max-w-xl bg-white rounded-2xl sm:rounded-3xl shadow-xl border border-slate-100 p-4 sm:p-8 md:p-10 transition-all">
         {/* Header */}
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-cyan-50 text-main-color mb-4 shadow-sm">
-            <Camera size="32" variant="Bulk" color="#2ccce4" />
+        <div className="text-center mb-6 sm:mb-8">
+          <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-cyan-50 text-main-color mb-3 sm:mb-4 shadow-sm">
+            <Camera size="28" variant="Bulk" color="#2ccce4" />
           </div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-slate-800 tracking-tight">
+          <h1 className="text-xl sm:text-3xl font-bold text-slate-800 tracking-tight">
             Update Profile Photo
           </h1>
-          <p className="text-slate-500 text-sm mt-1">
+          <p className="text-slate-500 text-xs sm:text-sm mt-1">
             Upload a new profile picture using an image URL or choose a file
           </p>
         </div>
 
         {/* Avatars Preview Section */}
-        <div className="flex items-center justify-center gap-6 sm:gap-10 mb-8 p-6 bg-slate-50 rounded-2xl border border-slate-100">
+        <div className="flex items-center justify-center gap-3 sm:gap-10 mb-6 sm:mb-8 p-3 sm:p-6 bg-slate-50 rounded-2xl border border-slate-100">
           {/* Current Avatar */}
           <div className="flex flex-col items-center gap-2">
             <div className="relative">

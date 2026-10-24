@@ -6,7 +6,7 @@ function Layout() {
   return (
     <>
       <Navbar />
-      <div className="bg-[#f0f2f5] min-h-screen pt-16 flex flex-col">
+      <div className="bg-[#f0f2f5] min-h-screen pt-16 pb-20 md:pb-6 flex flex-col">
         <Outlet />
         <Toaster position="top-right" />
       </div>

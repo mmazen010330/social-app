@@ -2,28 +2,35 @@ import { createContext, useEffect, useState } from "react";
 import type { UserAuthContextType, UserData } from "./userAuthProvider.interface";
 import { getUserData } from "./userAuthProvider.services";
 
-export const UserAuthContext =  createContext<UserAuthContextType>({
+export const UserAuthContext = createContext<UserAuthContextType>({
     userData: null,
-    setUserData: () => {}
-})
-
-// cal api   function Ashggashgd() {
-// return <Use></Use>
-// }
+    setUserData: () => {},
+    isLoading: true,
+});
 
 export default function UserAuthProvider({children}:{children: React.ReactNode}) {
-
-    // lazy initialization
-
-    const [userData, setUserData] = useState<UserData|null>(null)
+    const hasToken = typeof window !== "undefined" && Boolean(localStorage.getItem('user_tkn'));
+    const [userData, setUserData] = useState<UserData|null>(null);
+    const [isLoading, setIsLoading] = useState<boolean>(hasToken);
 
     useEffect(function() {
-        getUserData().then(function(data){setUserData(data)})
-    }, [])
+        if (!hasToken) {
+            setIsLoading(false);
+            return;
+        }
 
-    // use suspend
+        getUserData()
+            .then(function(data) {
+                setUserData(data);
+            })
+            .finally(function() {
+                setIsLoading(false);
+            });
+    }, [hasToken]);
 
-    return <UserAuthContext.Provider value={{userData, setUserData}}>
-        {children}
-    </UserAuthContext.Provider>
+    return (
+        <UserAuthContext.Provider value={{userData, setUserData, isLoading}}>
+            {children}
+        </UserAuthContext.Provider>
+    );
 }

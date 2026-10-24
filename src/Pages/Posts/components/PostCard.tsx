@@ -197,7 +197,7 @@ export const PostCard: React.FC<PostCardProps> = ({
     <article className="bg-white rounded-2xl shadow-xs border border-gray-100 p-4 mb-5 transition-all">
       {/* Post Header */}
       <div className="flex items-start justify-between mb-3">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5 sm:gap-3 min-w-0 flex-1 pr-2">
           <img
             src={authorPhoto}
             alt={authorName}
@@ -205,18 +205,18 @@ export const PostCard: React.FC<PostCardProps> = ({
               (e.currentTarget as HTMLImageElement).src =
                 "https://pub-3cba56bacf9f4965bbb0989e07dada12.r2.dev/linkedPosts/default-profile.png";
             }}
-            className="w-10 h-10 rounded-full object-cover border border-gray-100 shadow-xs"
+            className="w-9 h-9 sm:w-10 sm:h-10 rounded-full object-cover border border-gray-100 shadow-xs shrink-0"
           />
-          <div>
-            <h3 className="text-sm font-bold text-gray-900 leading-tight">
+          <div className="min-w-0">
+            <h3 className="text-xs sm:text-sm font-bold text-gray-900 leading-tight truncate">
               {authorName}
             </h3>
-            <div className="flex items-center gap-1.5 text-xs text-gray-500 mt-0.5">
-              <span>@{authorUsername}</span>
+            <div className="flex items-center gap-1 sm:gap-1.5 text-[11px] sm:text-xs text-gray-500 mt-0.5 flex-wrap">
+              <span className="truncate max-w-[100px] sm:max-w-none">@{authorUsername}</span>
               <span>·</span>
               <span>{formatTimeAgo(post.createdAt)}</span>
-              <span>·</span>
-              <div className="flex items-center gap-1 text-gray-400">
+              <span className="hidden xs:inline">·</span>
+              <div className="hidden xs:flex items-center gap-1 text-gray-400">
                 <Globe size={11} />
                 <span>Public</span>
               </div>
@@ -359,55 +359,55 @@ export const PostCard: React.FC<PostCardProps> = ({
       </div>
 
       {/* Action Buttons */}
-      <div className="grid grid-cols-4 border-t border-b border-gray-100 py-1 my-1">
+      <div className="grid grid-cols-4 border-t border-b border-gray-100 py-1 my-1 gap-0.5 sm:gap-1">
         <button
           type="button"
           onClick={handleToggleLike}
-          className={`flex items-center justify-center gap-2 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-colors cursor-pointer ${
+          className={`flex items-center justify-center gap-1 sm:gap-1.5 py-1.5 sm:py-2 px-1 rounded-xl text-[11px] sm:text-xs md:text-sm font-semibold transition-colors cursor-pointer ${
             isLiked
               ? "text-blue-600 bg-blue-50/60"
               : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
           }`}
         >
           <ThumbsUp
-            size={17}
-            className={isLiked ? "fill-blue-600 text-blue-600" : ""}
+            size={15}
+            className={`shrink-0 ${isLiked ? "fill-blue-600 text-blue-600" : ""}`}
           />
-          <span>Like</span>
+          <span className="truncate">Like</span>
         </button>
 
         <button
           type="button"
           onClick={handleToggleCommentsSection}
-          className="flex items-center justify-center gap-2 py-2 rounded-xl text-xs sm:text-sm font-semibold text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors cursor-pointer"
+          className="flex items-center justify-center gap-1 sm:gap-1.5 py-1.5 sm:py-2 px-1 rounded-xl text-[11px] sm:text-xs md:text-sm font-semibold text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors cursor-pointer"
         >
-          <MessageSquare size={17} />
-          <span>Comment</span>
+          <MessageSquare size={15} className="shrink-0" />
+          <span className="truncate">Comment</span>
         </button>
 
         <button
           type="button"
           onClick={handleShare}
-          className="flex items-center justify-center gap-2 py-2 rounded-xl text-xs sm:text-sm font-semibold text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors cursor-pointer"
+          className="flex items-center justify-center gap-1 sm:gap-1.5 py-1.5 sm:py-2 px-1 rounded-xl text-[11px] sm:text-xs md:text-sm font-semibold text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors cursor-pointer"
         >
-          <Share2 size={17} />
-          <span>Share</span>
+          <Share2 size={15} className="shrink-0" />
+          <span className="truncate">Share</span>
         </button>
 
         <button
           type="button"
           onClick={handleToggleBookmark}
-          className={`flex items-center justify-center gap-2 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-colors cursor-pointer ${
+          className={`flex items-center justify-center gap-1 sm:gap-1.5 py-1.5 sm:py-2 px-1 rounded-xl text-[11px] sm:text-xs md:text-sm font-semibold transition-colors cursor-pointer ${
             isBookmarked
               ? "text-blue-600 bg-blue-50/60"
               : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
           }`}
         >
           <Bookmark
-            size={17}
-            className={isBookmarked ? "fill-blue-600 text-blue-600" : ""}
+            size={15}
+            className={`shrink-0 ${isBookmarked ? "fill-blue-600 text-blue-600" : ""}`}
           />
-          <span>Save</span>
+          <span className="truncate">Save</span>
         </button>
       </div>
 

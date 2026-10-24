@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router";
+import { createBrowserRouter, Navigate } from "react-router";
 import Posts from "../Pages/Posts/Posts";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
@@ -12,22 +12,30 @@ import Profile from "../Pages/Profile/Profile";
 import Notifications from "../Pages/Notifications/Notifications";
 import Settings from "../Pages/Settings/Settings";
 
-export const router = createBrowserRouter([
+export const router = createBrowserRouter(
+  [
+    {
+      path: "",
+      element: <Layout />,
+      children: [
+        { index: true, element: <ProtectedRoute><Posts /></ProtectedRoute> },
+        { path: "posts", element: <ProtectedRoute><Posts /></ProtectedRoute> },
+        { path: "profile", element: <ProtectedRoute><Profile /></ProtectedRoute> },
+        { path: "notifications", element: <ProtectedRoute><Notifications /></ProtectedRoute> },
+        { path: "settings", element: <ProtectedRoute><Settings /></ProtectedRoute> },
+        { path: "change-profile-pic", element: <ProtectedRoute><ChangeProfilePic /></ProtectedRoute> },
+        { path: "login", element: <AuthProtected><Login /></AuthProtected> },
+        { path: "register", element: <AuthProtected><Register /></AuthProtected> },
+        { path: "social-app", element: <Navigate to="/posts" replace /> },
+        { path: "social-app/*", element: <Navigate to="/posts" replace /> },
+        { path: "*", element: <NotFound /> },
+      ],
+    },
+    { path: "*", element: <NotFound /> },
+  ],
   {
-    path: "",
-    element: <Layout />,
-    children: [
-      { index: true, element: <ProtectedRoute><Posts /></ProtectedRoute> },
-      { path: "posts", element: <ProtectedRoute><Posts /></ProtectedRoute> },
-      { path: "profile", element: <ProtectedRoute><Profile /></ProtectedRoute> },
-      { path: "notifications", element: <ProtectedRoute><Notifications /></ProtectedRoute> },
-      { path: "settings", element: <ProtectedRoute><Settings /></ProtectedRoute> },
-      { path: "change-profile-pic", element: <ProtectedRoute><ChangeProfilePic /></ProtectedRoute> },
-      { path: "login", element: <AuthProtected><Login /></AuthProtected> },
-      { path: "register", element: <AuthProtected><Register /></AuthProtected> },
-      { path: "*", element: <NotFound /> },
-    ],
-  },
-]);
+    basename: import.meta.env.BASE_URL,
+  }
+);
 
 // RouterProvider

@@ -59,18 +59,18 @@ function Settings() {
   };
 
   return (
-    <div className="w-full min-h-[calc(100vh-80px)] flex items-start justify-center px-4 py-8 sm:py-12 bg-[#f8fafc]">
-      <div className="w-full max-w-2xl bg-white rounded-3xl shadow-sm border border-gray-100 p-6 sm:p-10">
+    <div className="w-full min-h-[calc(100vh-80px)] flex items-start justify-center px-2 sm:px-4 py-4 sm:py-10 bg-[#f8fafc]">
+      <div className="w-full max-w-2xl bg-white rounded-2xl sm:rounded-3xl shadow-sm border border-gray-100 p-4 sm:p-8 md:p-10">
         {/* Header */}
-        <div className="flex items-center gap-4 mb-7">
-          <div className="w-12 h-12 rounded-full bg-sky-50 text-sky-500 flex items-center justify-center shrink-0">
-            <Key size={22} className="rotate-45" />
+        <div className="flex items-center gap-3 sm:gap-4 mb-5 sm:mb-7">
+          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-sky-50 text-sky-500 flex items-center justify-center shrink-0">
+            <Key size={20} className="rotate-45" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold text-gray-900 tracking-tight">
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-900 tracking-tight">
               Change Password
             </h1>
-            <p className="text-sm text-gray-500 mt-1">
+            <p className="text-xs sm:text-sm text-gray-500 mt-0.5 sm:mt-1">
               Keep your account secure by using a strong password.
             </p>
           </div>

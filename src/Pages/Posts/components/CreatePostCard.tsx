@@ -112,14 +112,14 @@ export const CreatePostCard: React.FC<CreatePostCardProps> = ({
   return (
     <div className="bg-white rounded-2xl shadow-xs border border-gray-100 p-4 mb-5">
       {/* User Header */}
-      <div className="flex items-center gap-3 mb-3">
+      <div className="flex flex-wrap items-center gap-3 mb-3">
         <img
           src={userAvatar}
           alt={userDisplayName}
-          className="w-10 h-10 rounded-full object-cover border border-gray-100 shadow-xs"
+          className="w-10 h-10 rounded-full object-cover border border-gray-100 shadow-xs shrink-0"
         />
-        <div className="relative">
-          <h4 className="text-sm font-bold text-gray-900 leading-tight">
+        <div className="relative min-w-0">
+          <h4 className="text-sm font-bold text-gray-900 leading-tight truncate">
             {userDisplayName}
           </h4>
           <div className="relative mt-0.5">
@@ -227,7 +227,7 @@ export const CreatePostCard: React.FC<CreatePostCardProps> = ({
 
       {/* Feelings Selector Popup */}
       {isFeelingOpen && (
-        <div className="mb-3 p-2 bg-amber-50/50 border border-amber-100 rounded-xl flex flex-wrap gap-2 animate-in fade-in">
+        <div className="mb-3 p-2 bg-amber-50/50 border border-amber-100 rounded-xl flex flex-wrap gap-1.5 sm:gap-2 animate-in fade-in">
           {feelings.map((f) => (
             <button
               key={f.label}
@@ -236,7 +236,7 @@ export const CreatePostCard: React.FC<CreatePostCardProps> = ({
                 setSelectedFeeling(`${f.emoji} ${f.label}`);
                 setIsFeelingOpen(false);
               }}
-              className="px-2.5 py-1 rounded-lg bg-white border border-amber-200/60 text-xs font-medium text-gray-700 hover:bg-amber-100/70 transition-colors flex items-center gap-1.5"
+              className="px-2 sm:px-2.5 py-1 rounded-lg bg-white border border-amber-200/60 text-[11px] sm:text-xs font-medium text-gray-700 hover:bg-amber-100/70 transition-colors flex items-center gap-1 sm:gap-1.5"
             >
               <span>{f.emoji}</span>
               <span>{f.label}</span>
@@ -246,24 +246,26 @@ export const CreatePostCard: React.FC<CreatePostCardProps> = ({
       )}
 
       {/* Action Row */}
-      <div className="flex items-center justify-between pt-3 border-t border-gray-100">
-        <div className="flex items-center gap-1 sm:gap-2">
+      <div className="flex items-center justify-between pt-3 border-t border-gray-100 gap-2">
+        <div className="flex items-center gap-1 sm:gap-2 min-w-0">
           <button
             type="button"
             onClick={() => fileInputRef.current?.click()}
-            className="flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold text-gray-600 hover:bg-emerald-50 hover:text-emerald-700 transition-all cursor-pointer"
+            className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold text-gray-600 hover:bg-emerald-50 hover:text-emerald-700 transition-all cursor-pointer"
           >
-            <ImageIcon size={18} className="text-emerald-500" />
-            <span>Photo/video</span>
+            <ImageIcon size={17} className="text-emerald-500 shrink-0" />
+            <span className="hidden sm:inline">Photo/video</span>
+            <span className="sm:hidden">Photo</span>
           </button>
 
           <button
             type="button"
             onClick={() => setIsFeelingOpen(!isFeelingOpen)}
-            className="flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold text-gray-600 hover:bg-amber-50 hover:text-amber-700 transition-all cursor-pointer"
+            className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold text-gray-600 hover:bg-amber-50 hover:text-amber-700 transition-all cursor-pointer"
           >
-            <Smile size={18} className="text-amber-500" />
-            <span>Feeling/activity</span>
+            <Smile size={17} className="text-amber-500 shrink-0" />
+            <span className="hidden sm:inline">Feeling/activity</span>
+            <span className="sm:hidden">Feeling</span>
           </button>
         </div>
 
@@ -271,17 +273,17 @@ export const CreatePostCard: React.FC<CreatePostCardProps> = ({
           type="button"
           disabled={isLoading || (!content.trim() && !selectedImage)}
           onClick={() => handleSubmit()}
-          className="flex items-center gap-2 px-5 py-2 rounded-xl text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed shadow-xs transition-all cursor-pointer"
+          className="flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-5 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed shadow-xs transition-all cursor-pointer shrink-0"
         >
           {isLoading ? (
             <>
-              <Loader2 size={16} className="animate-spin" />
+              <Loader2 size={15} className="animate-spin" />
               <span>Posting...</span>
             </>
           ) : (
             <>
               <span>Post</span>
-              <Send size={15} />
+              <Send size={14} />
             </>
           )}
         </button>

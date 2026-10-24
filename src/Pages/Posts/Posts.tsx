@@ -126,9 +126,9 @@ function Posts() {
         </div>
 
         {/* Center Main Feed */}
-        <main className="col-span-1 lg:col-span-6 space-y-4">
+        <main className="col-span-1 lg:col-span-6 space-y-4 max-w-2xl mx-auto lg:max-w-none w-full">
           {/* Mobile Filter Tabs */}
-          <div className="lg:hidden flex items-center justify-between bg-white rounded-2xl p-2 border border-gray-100 shadow-xs mb-3 overflow-x-auto">
+          <div className="lg:hidden flex items-center gap-1.5 bg-white rounded-2xl p-1.5 border border-gray-100 shadow-xs mb-3 overflow-x-auto no-scrollbar">
             {(
               [
                 { id: "feed", label: "Feed" },
@@ -140,9 +140,9 @@ function Posts() {
               <button
                 key={t.id}
                 onClick={() => setActiveFilter(t.id)}
-                className={`px-3 py-1.5 text-xs font-bold rounded-xl transition-all shrink-0 ${
+                className={`flex-1 min-w-[75px] py-1.5 text-xs font-bold rounded-xl transition-all text-center shrink-0 cursor-pointer ${
                   activeFilter === t.id
-                    ? "bg-blue-50 text-blue-600"
+                    ? "bg-blue-50 text-blue-600 shadow-2xs"
                     : "text-gray-600 hover:text-gray-900"
                 }`}
               >

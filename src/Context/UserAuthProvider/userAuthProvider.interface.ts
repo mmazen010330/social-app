@@ -1,6 +1,7 @@
 export interface UserAuthContextType {
-    userData: UserData | null,
-    setUserData: React.Dispatch<React.SetStateAction<UserData|null>>
+    userData: UserData | null;
+    setUserData: React.Dispatch<React.SetStateAction<UserData|null>>;
+    isLoading?: boolean;
 }
 
 export interface UserDataResponseType {

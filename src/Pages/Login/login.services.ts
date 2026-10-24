@@ -1,10 +1,13 @@
 import axios from "axios";
 import type { LoginResponseType, LoginUserDataType } from "./login.interface";
 
+const API_BASE_URL =
+  import.meta.env.VITE_BASE_URL || "https://route-posts.routemisr.com";
+
 export async function userLogin(userData: LoginUserDataType): Promise<LoginResponseType> {
   try {
     const data = await axios.post<LoginResponseType>(
-      `${import.meta.env.VITE_BASE_URL}/users/signin`,
+      `${API_BASE_URL}/users/signin`,
       userData,
     );
 

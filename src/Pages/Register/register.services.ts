@@ -1,10 +1,13 @@
 import axios from "axios";
 import type { RegisterResponseType, UserDataType } from "./register.interface";
 
+const API_BASE_URL =
+  import.meta.env.VITE_BASE_URL || "https://route-posts.routemisr.com";
+
 export async function userRegister(userData: UserDataType): Promise<string> {
   try {
     const res = await axios.post<RegisterResponseType>(
-      `${import.meta.env.VITE_BASE_URL}/users/signup`,
+      `${API_BASE_URL}/users/signup`,
       userData,
     );
 
